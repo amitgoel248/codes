@@ -1,23 +1,19 @@
-package com.yatra.products.corporate.service;
+package Algo.Tree.HLD;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
-public class Main {
+import Common.JavaInputFile;
 
-	static BufferedReader br = new BufferedReader(
-            new InputStreamReader(System.in));
+public class HLD_Query3 extends JavaInputFile {
+
 	static int segIndex = -1;
 	static int branchIndex = 0;
 
 	public static void main(String[] args) throws java.lang.Exception {
 
 		ArrayList<ArrayList<Integer>> tree = new ArrayList<>();
-		StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int q = Integer.parseInt(st.nextToken());
+		int n = readInt();
+		int q = readInt();
 		node treeNode[] = new node[n];
 		int[] branchSequenceHeads = new int[n];
 		int segArray[] = new int[n];
@@ -28,9 +24,8 @@ public class Main {
 		}
 
 		for (int i = 0; i < n - 1; i++) {
-			StringTokenizer st2 = new StringTokenizer(br.readLine());
-	        int a = Integer.parseInt(st2.nextToken());
-	        int b = Integer.parseInt(st2.nextToken());
+			int a = readInt();
+			int b = readInt();
 			a--;
 			b--;
 			tree.get(a).add(b);
@@ -46,9 +41,8 @@ public class Main {
 		// printEverything(n, treeNode, branchSequenceHeads, segTree, tree);
 
 		for (int i = 0; i < q; i++) {
-			StringTokenizer st2 = new StringTokenizer(br.readLine());
-	        int type = Integer.parseInt(st2.nextToken());
-	        int ele = Integer.parseInt(st2.nextToken());
+			int type = readInt();
+			int ele = readInt();
 			ele--;
 			if (type == 1) {
 				int ans = query(ele, 0, treeNode, branchSequenceHeads, n, segTree);
@@ -62,27 +56,27 @@ public class Main {
 		}
 	}
 
-	private static void printEverything(int n, node[] treeNode, int[] branchSequenceHeads, int[] segTree,
-			ArrayList<ArrayList<Integer>> tree) {
-		for (int i = 0; i < n; i++) {
-			System.out.println(treeNode[i].toString());
-		}
-
-		for (int i = 0; i < 4 * n; i++)
-			System.out.print(segTree[i] + " ");
-		System.out.println();
-
-		for (int i = 0; i < tree.size(); i++) {
-			for (int j = 0; j < tree.get(i).size(); j++)
-				System.out.print(tree.get(i).get(j) + " ");
-			System.out.println();
-		}
-
-		for (int i = 0; i <= branchIndex; i++) {
-			System.out.print(branchSequenceHeads[i] + " ");
-		}
-		System.out.println();
-	}
+//	private static void printEverything(int n, node[] treeNode, int[] branchSequenceHeads, int[] segTree,
+//			ArrayList<ArrayList<Integer>> tree) {
+//		for (int i = 0; i < n; i++) {
+//			System.out.println(treeNode[i].toString());
+//		}
+//
+//		for (int i = 0; i < 4 * n; i++)
+//			System.out.print(segTree[i] + " ");
+//		System.out.println();
+//
+//		for (int i = 0; i < tree.size(); i++) {
+//			for (int j = 0; j < tree.get(i).size(); j++)
+//				System.out.print(tree.get(i).get(j) + " ");
+//			System.out.println();
+//		}
+//
+//		for (int i = 0; i <= branchIndex; i++) {
+//			System.out.print(branchSequenceHeads[i] + " ");
+//		}
+//		System.out.println();
+//	}
 
 	private static int createSegmentTree(int i, int j, int[] segTree, int index) {
 		if (i == j) {
@@ -178,7 +172,7 @@ public class Main {
 		segArray[++segIndex] = root;
 		treeNode[root].indexInSegArray = segIndex;
 		treeNode[root].branchNo = branchIndex;
-		int maxChild = treeNode[root].getMaxNextElement();
+		int maxChild = treeNode[root].maxNextElement;
 		if (maxChild == -1)
 			return;
 		create_HLD(treeNode, tree, segArray, maxChild, root, branchSequenceHeads);
@@ -210,67 +204,20 @@ public class Main {
 		return treeNode[root].size;
 	}
 
+	private static class node {
+		int size;
+		int maxNextElement;
+		int branchNo;
+		int indexInSegArray;
+		int parent;
+		int depth;
+		
+		@Override
+		public String toString() {
+			return "node [size=" + size + ", maxNextElement=" + maxNextElement + ", branchNo=" + branchNo
+					+ ", indexInSegArray=" + indexInSegArray + ", parent=" + parent + ", depth=" + depth + "]";
+		}
+	}
+
 }
 
-class node {
-	int size;
-	int maxNextElement;
-	int branchNo;
-	int indexInSegArray;
-	int parent;
-	int depth;
-
-	public int getDepth() {
-		return depth;
-	}
-
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-
-	public int getParent() {
-		return parent;
-	}
-
-	public void setParent(int parent) {
-		this.parent = parent;
-	}
-
-	public int getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(int branchNo) {
-		this.branchNo = branchNo;
-	}
-
-	public int getIndexInSegArray() {
-		return indexInSegArray;
-	}
-
-	public void setIndexInSegArray(int indexInSegArray) {
-		this.indexInSegArray = indexInSegArray;
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	public int getMaxNextElement() {
-		return maxNextElement;
-	}
-
-	public void setMaxNextElement(int maxNextElement) {
-		this.maxNextElement = maxNextElement;
-	}
-
-	@Override
-	public String toString() {
-		return "node [size=" + size + ", maxNextElement=" + maxNextElement + ", branchNo=" + branchNo
-				+ ", indexInSegArray=" + indexInSegArray + ", parent=" + parent + ", depth=" + depth + "]";
-	}
-}

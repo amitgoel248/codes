@@ -1,18 +1,18 @@
-package com.yatra.products.corporate.controller;
+package Algo.Tree.HLD;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Notify {
+import Common.JavaInputFile;
 
-	static Scanner sc = new Scanner(System.in);
+public class HLD_basic extends JavaInputFile {
+
 	static int segIndex = -1;
 	static int branchIndex = 0;
 
 	public static void main(String[] args) {
 
 		ArrayList<ArrayList<Integer>> tree = new ArrayList<>();
-		int n = Integer.parseInt(sc.nextLine());
+		int n = readInt();
 		node treeNode[] = new node[n];
 		int[] branchSequenceHeads = new int[n];
 		int segArray[] = new int[n];
@@ -23,11 +23,9 @@ public class Notify {
 		}
 
 		for (int i = 0; i < n - 1; i++) {
-			String s = sc.nextLine();
-			String[] aandb = s.split(" ");
-			int a = Integer.parseInt(aandb[0]);
-			int b = Integer.parseInt(aandb[1]);
-			// int w = Integer.parseInt(sc.nextLine());
+			int a = readInt();
+			int b = readInt();
+			// int w = readInt();
 			tree.get(a).add(b);
 			tree.get(b).add(a);
 		}
@@ -40,14 +38,12 @@ public class Notify {
 
 		printEverything(n, treeNode, branchSequenceHeads, segArray, segTree, tree);
 
-		int q = Integer.parseInt(sc.nextLine());
+		int q = readInt();
 
 		for (int i = 0; i < q; i++) {
-			String query = sc.nextLine();
-			String[] splits = query.split(" ");
-			int type = Integer.parseInt(splits[0]);
-			int ele1 = Integer.parseInt(splits[1]);
-			int ele2 = Integer.parseInt(splits[2]);
+			int type = readInt();
+			int ele1 = readInt();
+			int ele2 = readInt();
 
 			if (type == 1) {
 				int ans = query(ele1, ele2, treeNode, branchSequenceHeads, n, segTree);
@@ -99,7 +95,7 @@ public class Notify {
 	}
 
 	private static int updateSegmentTree(int[] segTree, int indexInSegArray, int weight, int i, int j, int index) {
-		if(indexInSegArray < i || indexInSegArray > j)
+		if (indexInSegArray < i || indexInSegArray > j)
 			return segTree[index];
 		if (i == j && i == indexInSegArray) {
 			return segTree[index] = weight;
@@ -153,7 +149,7 @@ public class Notify {
 		segArray[++segIndex] = root;
 		treeNode[root].indexInSegArray = segIndex;
 		treeNode[root].branchNo = branchIndex;
-		int maxChild = treeNode[root].getMaxNextElement();
+		int maxChild = treeNode[root].maxNextElement;
 		if (maxChild == -1)
 			return;
 		create_HLD(treeNode, tree, segArray, maxChild, root, branchSequenceHeads);
@@ -185,67 +181,19 @@ public class Notify {
 		return treeNode[root].size;
 	}
 
-}
+	private static class node {
+		int size;
+		int maxNextElement;
+		int branchNo;
+		int indexInSegArray;
+		int parent;
+		int depth;
 
-class node {
-	int size;
-	int maxNextElement;
-	int branchNo;
-	int indexInSegArray;
-	int parent;
-	int depth;
-
-	public int getDepth() {
-		return depth;
+		@Override
+		public String toString() {
+			return "node [size=" + size + ", maxNextElement=" + maxNextElement + ", branchNo=" + branchNo
+					+ ", indexInSegArray=" + indexInSegArray + ", parent=" + parent + ", depth=" + depth + "]";
+		}
 	}
 
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-
-	public int getParent() {
-		return parent;
-	}
-
-	public void setParent(int parent) {
-		this.parent = parent;
-	}
-
-	public int getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(int branchNo) {
-		this.branchNo = branchNo;
-	}
-
-	public int getIndexInSegArray() {
-		return indexInSegArray;
-	}
-
-	public void setIndexInSegArray(int indexInSegArray) {
-		this.indexInSegArray = indexInSegArray;
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	public int getMaxNextElement() {
-		return maxNextElement;
-	}
-
-	public void setMaxNextElement(int maxNextElement) {
-		this.maxNextElement = maxNextElement;
-	}
-
-	@Override
-	public String toString() {
-		return "node [size=" + size + ", maxNextElement=" + maxNextElement + ", branchNo=" + branchNo
-				+ ", indexInSegArray=" + indexInSegArray + ", parent=" + parent + ", depth=" + depth + "]";
-	}
 }

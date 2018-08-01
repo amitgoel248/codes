@@ -1,21 +1,25 @@
-package com.yatra.products.corporate.controller;
+package Algo.Graph.DFS_BFS;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.ByteArrayInputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.StringTokenizer;
 
-public class Main {
+import Common.JavaInputFile;
 
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+public class DFS_BFS extends JavaInputFile {
 
 	public static void main(String[] args) throws java.lang.Exception {
+		is = INPUT.isEmpty() ? System.in : new ByteArrayInputStream(INPUT.getBytes());
+		out = new PrintWriter(System.out);
+		solve();
+		out.flush();
+	}
 
-		StringTokenizer nAndm = new StringTokenizer(br.readLine());
-		int n = Integer.parseInt(nAndm.nextToken()); // number of nodes
-		int m = Integer.parseInt(nAndm.nextToken()); // number of edges
+	private static void solve() {
+		int n = readInt();
+		int m = readInt();
 
 		ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
@@ -24,9 +28,8 @@ public class Main {
 		}
 
 		for (int i = 0; i < m; i++) {
-			StringTokenizer aAndb = new StringTokenizer(br.readLine());
-			int a = Integer.parseInt(aAndb.nextToken());
-			int b = Integer.parseInt(aAndb.nextToken());
+			int a = readInt();
+			int b = readInt();
 			graph.get(a).add(b);
 			graph.get(b).add(a);
 		}

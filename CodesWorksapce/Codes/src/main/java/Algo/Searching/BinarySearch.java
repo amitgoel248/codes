@@ -1,12 +1,10 @@
-package com.yatra.products.corporate.service;
+package Algo.Searching;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-public class Main {
+import Common.JavaInputFile;
 
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+public class BinarySearch extends JavaInputFile{
 
 	public static void main(String[] args) throws IOException {
 		System.out.println(binarySearch(1, 1000000000, 3, "left"));
@@ -16,7 +14,7 @@ public class Main {
 		double ans = -1;
 		while (left <= right) {
 			double mid = Double.parseDouble(String.format("%." + precision + "f", left + (right - left) / 2));
-			//System.out.printf("%f", mid);
+			// System.out.printf("%f", mid);
 			double unitDist = (double) 1 / (double) Math.pow(10, precision);
 			if (solve(mid)) {
 				ans = mid;
