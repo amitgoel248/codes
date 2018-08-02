@@ -3,6 +3,7 @@ package Common;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
@@ -14,12 +15,13 @@ public class JavaInputFile {
 	private static byte[] inbuf = new byte[1024];
 	public static int lenbuf = 0, ptrbuf = 0;
 
-//	public static void main(String[] args) {
-//		is = INPUT.isEmpty() ? System.in : new ByteArrayInputStream(INPUT.getBytes());
-//		out = new PrintWriter(System.out);
-//		solve();
-//		out.flush();
-//	}
+	// public static void main(String[] args) {
+	// is = INPUT.isEmpty() ? System.in : new
+	// ByteArrayInputStream(INPUT.getBytes());
+	// out = new PrintWriter(System.out);
+	// solve();
+	// out.flush();
+	// }
 
 	public static int readByte() {
 		if (lenbuf == -1)
@@ -80,6 +82,20 @@ public class JavaInputFile {
 		int[] a = new int[n];
 		for (int i = 0; i < n; i++)
 			a[i] = readInt();
+		return a;
+	}
+
+	public static ArrayList<Integer> readArrayListInt(int n) {
+		ArrayList<Integer> a = new ArrayList<>();
+		for (int i = 0; i < n; i++)
+			a.add(readInt());
+		return a;
+	}
+
+	public static ArrayList<String> readArrayListString(int n) {
+		ArrayList<String> a = new ArrayList<>();
+		for (int i = 0; i < n; i++)
+			a.add(readString());
 		return a;
 	}
 
