@@ -59,6 +59,7 @@ public class BasicTrie extends JavaInputFile {
 		return 0;
 	}
 
+	// returns number of string same as 's' in the trie
 	public static int searchTrie(TrieNode root, String s, int size) {
 		for (int i = 0; i < s.length(); i++) {
 			if (root.next.get(getIndex(s.charAt(i))) == null) {
@@ -67,6 +68,20 @@ public class BasicTrie extends JavaInputFile {
 			root = root.next.get(getIndex(s.charAt(i)));
 			if (i == s.length() - 1 && root.isEnd != 0) {
 				return root.isEnd;
+			}
+		}
+		return 0;
+	}
+
+	// returns number of string whose prefix is same as 's' in the trie
+	public static int partialSearchTrie(TrieNode root, String s, int size) {
+		for (int i = 0; i < s.length(); i++) {
+			if (root.next.get(getIndex(s.charAt(i))) == null) {
+				return 0;
+			}
+			root = root.next.get(getIndex(s.charAt(i)));
+			if (i == s.length() - 1) {
+				return root.frequency;
 			}
 		}
 		return 0;

@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import Common.JavaInputFile;
 
-public class BinarySearch extends JavaInputFile{
+public class BinarySearch extends JavaInputFile {
 
 	public static void main(String[] args) throws IOException {
-		System.out.println(binarySearch(1, 1000000000, 3, "left"));
+		System.out.println(binarySearchIteration(1, 1000000000, 3, "left"));
 	}
 
-	static double binarySearch(double left, double right, int precision, String toMove) {
+	static double binarySearchIteration(double left, double right, int precision, String toMove) {
 		double ans = -1;
 		while (left <= right) {
 			double mid = Double.parseDouble(String.format("%." + precision + "f", left + (right - left) / 2));
