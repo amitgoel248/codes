@@ -1,6 +1,8 @@
 package Algo.Searching;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import Common.JavaInputFile;
 
@@ -32,6 +34,33 @@ public class BinarySearch extends JavaInputFile {
 			}
 		}
 		return ans;
+	}
+
+	// in case of duplicate keys ... which key is required smallest or largest is
+	// determined by toMove (left = small && right = large)
+	static int binary_search(ArrayList<Integer> list, int key, String toMove) {
+		int low = 0;
+		int high = list.size() - 1;
+
+		int index = -1;
+		while (low <= high) {
+			int mid = (low + high) >>> 1;
+			int midVal = list.get(mid);
+
+			if (midVal == key) {
+				index = mid;
+				if (toMove.equalsIgnoreCase("left"))
+					high = mid - 1;
+				else
+					low = mid + 1;
+			} else if (midVal > key)
+				high = mid - 1;
+			else
+				low = mid + 1;
+		}
+		if (index == -1)
+			return Collections.binarySearch(list, key);
+		return index;
 	}
 
 	static boolean solve(double x) {

@@ -1,0 +1,55 @@
+In Secondary Memory - A disk contains multiple platters over which data is wrtten (probably on both side) using some magnetic methods.
+
+Since there are multiple processes running simultaneously in a multiprocessing system, hence data is being asked by the CPU from the secondary memory. Now the head has to move to the correct address location and provide the data.
+
+Seek Time  - Time taken by the head to move to the correct track is called seek time.
+Rotational Latency - Time taken by the head(Actually the disk rotates) to move to the correct sector on that track.
+
+
+There are multiple algorithms for the movement of head in order to minimise the seek time and waiting time of processes.
+
+1) FCFS - First come first serve 
+	- Request are processes in FCFS manner
+	- Head movement is too high in this case.
+	- No starvation.
+
+2) SSTF - Shortest seek time first.
+	- Head move to that particulat track(request) which is more close to it at that moment.
+	- In case of a tie...head movement is along the direction of movement only.
+	- Reduced seek time 
+	- Average waiting time for some processes is very high.
+	- Starvation 
+	- In order to calculate the closest node.. a balanced binary search tree can be used (Tree map in java)
+		- insert logn
+		- search floor key and ceil key is logn
+
+3) SCAN - Request are processed in a ZigZag manner
+	- Head start to move in one direction uptill the end..then from that end takes a U turn and processes till the other end and so on.
+	- No starvation 
+	- suppose there are 100 tracks....now the request at track 1 is processed and it will be processed again after a complete circular motion of the track... while the request processed at 99 will again be processed just after it processes 100. So avg waiting time is biased.
+
+4) C-SCAN - The Problem with SCAN is rectified here...Request are processed in a circular fashion
+	- from 0 - 100 then head comes back to 0 again(without processing any intermidiate request)...then from 0 to 100 and so on.
+	- Here the head movement is high...but waiting time is less .. because coming back without processing is quite fast.
+
+5) LOOK - In case of SCAN.. we are moveing till the end of tracks...which is not actually required in case if there are no request present at the end points.
+	- So here we just move uptill the last request...and then return back from there.
+	- Last and first request can be maintained using a heap data Structure. 
+
+6) C-LOOK - LOOK in a circular fashion.
+
+
+There is no algorithm which is considered the best, different scenarios has different useCase and different algos are used.
+
+	- In case when the load is very high.. are we are almost sure the there will be request present at almost every point..we can use C-SCAN 
+	- but in case when the load is less...we can use the C-LOOK algorithm.
+
+For eg - A train moves from one end point to another end point because the load is high..and people are mostly travelling at the end points.(SCAN)
+	- In case of a taxi or Auto the load is less and the auto only goes to the poing where the request can be satisfied (LOOK)
+
+
+
+
+
+
+

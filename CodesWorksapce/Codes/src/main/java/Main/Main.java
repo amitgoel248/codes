@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.TreeMap;
 
 public class Main {
 
@@ -16,7 +17,7 @@ public class Main {
 	private static byte[] inbuf = new byte[1024];
 	public static int lenbuf = 0, ptrbuf = 0;
 
-	public static int readByte() {
+	private static int readByte() {
 		if (lenbuf == -1)
 			throw new InputMismatchException();
 		if (ptrbuf >= lenbuf) {
@@ -147,5 +148,36 @@ public class Main {
 	}
 
 	private static void solve() {
+		int n = readInt();
+		TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+		int head = 0;
+		for (int i = 0; i < n; i++) {
+			int type = readInt();
+			if (type == 1) {
+				int x = readInt();
+				treeMap.put(x, 1);
+			} else {
+				Integer floorKey = treeMap.floorKey(head);
+				Integer ceilKey = treeMap.ceilingKey(head);
+				if (floorKey == null) {
+					System.out.println(ceilKey);
+					treeMap.remove(ceilKey);
+					head = ceilKey;
+				} else if (ceilKey == null) {
+					System.out.println(floorKey);
+					treeMap.remove(floorKey);
+					head = floorKey;
+				} else if (head - floorKey < ceilKey - head) {
+					System.out.println(floorKey);
+					treeMap.remove(floorKey);
+					head = floorKey;
+				} else {
+					System.out.println(ceilKey);
+					treeMap.remove(ceilKey);
+					head = ceilKey;
+				}
+			}
+		}
 	}
+
 }

@@ -1,0 +1,46 @@
+OS - a software thst acts as an intermidiate person between the hardware and the software.
+Goels of OS - A user can directly access the OS using machine language, but OS helps to make it efficient and userFriendly.
+Functions - Memory, I/O devices, File, Network, Security Management etc is done by OS.
+
+1) CPU have only a small memory
+	- No secondary Memory
+	- One program is loaded processed and output is produced.
+	- ideal CPU
+	
+2) Batch Processing 
+	- No secondary Memory
+	- BatchManager is introduced whose task is to collect similar processes and club them in a batch and them provide it to CPU so that 
+	  the processing improves.
+	- too much waiting time from input output devices (ideal CPU)
+
+3) SPOOLING - simultaneous peripheral operation online
+	- secondary memory is introduced
+	- I/O devices loads the data into the secondary memory  
+	- Main memory / CPU interacts with the secondary memory for processing (less ideal in this case)
+	- Sequential Processing .. hence if the current running process need to wait .. CPU becomes ideal	
+
+4) MultiProgramming (context switiching is introduced)
+	- if the current running process is interupted then the CPU switches the context to another process and starts processing.
+	
+5) MultiTasking 
+	- in multiProgramming context is switched only when the current process gows to a waiting state on its own.
+	  But in case of Multitasking the CPU itself switches the context based on some algorithm(Round Robin may be) so quickly that 
+          it apperars to perform multiple task at the same time.
+
+6) MultiProcessing 
+	- Up till now there was only one processor that could handle only one process at a time (yes context switching is there), but 
+          it was still slow.
+	- MultiProccessing introduced multiple cores(processors)..that used the same element of the computer(Secondary Memory, Buses, Registers)
+          except the processor part.
+	- Hence MultiThreding was introduced.
+	- Multiple processes running simultaneously on different cores. 
+	
+7) Distributed Systems (Load balancing)
+	- Multiple computers for handling heavy load using some load balancer.
+
+
+
+
+
+
+
