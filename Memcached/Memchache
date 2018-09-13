@@ -1,0 +1,46 @@
+
+Memcache
+
+--Memcached is an in-memory key-value store
+--Memcached server is a big hash table.
+--It significantly reduces the database load
+--Intended to speed up dynamic web applications
+--It is NOT fault-tolerant or highly available
+ 
+
+
+
+
+
+
+
+
+Redis - 
+
+--Again an in memory key-value store
+
+
+
+
+
+Differences
+
+--Data eviction (deleting old data using LRU) is managed by memcache only while Redis, by contrast, allows for fine-grained control over eviction, letting you choose from six different eviction policies
+--Memcached limits key names to 250 bytes and works with plain strings only, Redis allows key names and values to be as large as 512MB each
+--Redis can store any aspect of the data natively(lists, sets, sorted sets, hyperloglogs, bitmaps, and geospatial indexes), thus reducing serialization overhead while Memcache Supportes only String as key-value (serilization Required).
+--Redis, which is mostly single-threaded, can scale horizontally via clustering without loss of data while Memcached is multithreaded, you can easily scale up by giving it more computational resources, but you will lose part or all of the cached data (depending on whether you use consistent hashing).
+
+
+Advantages of redis
+
+--Using Redis data structures can simplify and optimize several tasks—not only while caching, but even when you want the data to be persistent and always available. For example, instead of storing objects as serialized strings, developers can use a Redis Hash to store an object’s fields and values, and manage them using a single key. Redis Hash saves developers the need to fetch the entire string, deserialize it, update a value, reserialize the object, and replace the entire string in the cache with its new value for every trivial update—that means lower resource consumption and increased performance.
+
+
+--Redis offers optional and tunable data persistence designed to bootstrap the cache after a planned shutdown or an unplanned failure. While we tend to regard the data in caches as volatile and transient, persisting data to disk can be quite valuable in caching scenarios. Having the cache’s data available for loading immediately after restart allows for much shorter cache warm-up and removes the load involved in repopulating and recalculating cache contents from the primary data store.
+
+--Redis can also replicate the data that it manages. Replication can be used for implementing a highly available cache setup that can withstand failures and provide uninterrupted service to the application.
+
+
+
+
+
